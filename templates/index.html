@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Phone Price Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f5f9;
+            margin: 0;
+            padding: 30px;
+        }
+        .container {
+            max-width: 620px;
+            margin: auto;
+            background: white;
+            padding: 28px;
+            border-radius: 12px;
+            box-shadow: 0 3px 14px rgba(0,0,0,0.08);
+        }
+        h1 { text-align: center; color: #23395d; }
+        label { display: block; margin-top: 14px; font-weight: bold; }
+        input, select {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+            margin-top: 6px;
+            border: 1px solid #cbd2dc;
+            border-radius: 6px;
+        }
+        button {
+            width: 100%;
+            margin-top: 22px;
+            padding: 12px;
+            border: 0;
+            border-radius: 6px;
+            background: #2457a7;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 22px;
+            padding: 16px;
+            background: #eaf4ea;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .small { color: #555; font-size: 13px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mobile Phone Price Prediction</h1>
+        <p>Enter the mobile phone specifications to estimate its price.</p>
+
+        <form method="POST">
+            <label>RAM (GB)</label>
+            <input type="number" name="ram" min="1" max="24" step="1" required>
+
+            <label>Battery capacity (mAh)</label>
+            <input type="number" name="battery" min="1000" max="7000" step="100" required>
+
+            <label>Storage (GB)</label>
+            <input type="number" name="storage" min="16" max="1024" step="16" required>
+
+            <label>Camera (MP)</label>
+            <input type="number" name="camera" min="2" max="200" step="1" required>
+
+            <label>Screen size (inches)</label>
+            <input type="number" name="screen" min="4" max="8" step="0.1" required>
+
+            <label>5G support</label>
+            <select name="five_g" required>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <button type="submit">Predict Price</button>
+        </form>
+
+        {% if predicted_price is not none %}
+        <div class="result">
+            <h2>Estimated price: ₹{{ "{:,.0f}".format(predicted_price) }}</h2>
+        </div>
+        {% endif %}
+
+        <p class="small">Model test MAE: {{ mae }} | R² score: {{ r2 }}</p>
+    </div>
+</body>
+</html>
