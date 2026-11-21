@@ -6,7 +6,7 @@ from sklearn.metrics import mean_absolute_error, r2_score
 
 app = Flask(__name__)
 
-data = pd.read_csv("dataset/mobile_phone_prices.csv")
+data = pd.read_csv("mobile_phone_prices.csv")
 
 X = data[[
     "ram_gb",
